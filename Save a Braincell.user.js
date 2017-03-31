@@ -14,7 +14,7 @@
     'use strict';
     
     function hideTheComments() {
-        if ($('#save-braincell').html() == "Show Comments") {
+        if ($('.save-braincell').html() == "Show Comments") {
             $('#watch-discussion').toggleClass('toggleComments');
         }
     }
@@ -26,9 +26,16 @@
     var btn = document.createElement("BUTTON");
     var t = document.createTextNode("Hide Comments");
     btn.appendChild(t);
-    btn.setAttribute("id", "save-braincell");
-    btn.setAttribute("class", "yt-uix-button");
-    document.getElementById("yt-masthead-signin").appendChild(btn);
+    btn.setAttribute("class", "save-braincell");
+    btn.className += " yt-uix-button";
+    
+    if (document.getElementById("yt-masthead-user") !==null) {
+        document.getElementById("yt-masthead-user").appendChild(btn);
+    } else {
+        document.getElementById("yt-masthead-signin").appendChild(btn);
+    }
+
+    
     
     $("<style>")
     .prop("type", "text/css")
@@ -39,17 +46,17 @@
     .appendTo("head");
     
     
-    GM_addStyle(`#save-braincell { background-color: #e62117;
-                                   color: white }`);
+    GM_addStyle(`.save-braincell { background-color: #e62117 !important;
+                                   color: white; }`);
     
     
-    $("#save-braincell").click(function() {
+    $(".save-braincell").click(function() {
         //GM_addStyle("#watch-discussion { display: none !important; }");
         $("#watch-discussion").toggleClass("toggleComments");
-        if ($('#save-braincell').html() == "Hide Comments") {
-            $("#save-braincell").html("Show Comments");
+        if ($('.save-braincell').html() == "Hide Comments") {
+            $(".save-braincell").html("Show Comments");
         } else {
-            $("#save-braincell").html("Hide Comments");
+            $(".save-braincell").html("Hide Comments");
         }
     });
 
